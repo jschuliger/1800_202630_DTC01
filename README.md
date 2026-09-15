@@ -62,7 +62,7 @@ elmo-hikes/
 
 ## Contributors
 
-- **Griffin** - BCIT CST Student with a passion for cats and volleyball.
+- **Griffin** - BCIT CST Student with a passion for everything cats and volleyball. Interests also include motorcycling and music.
 
 ---
 
