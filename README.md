@@ -65,7 +65,7 @@ elmo-hikes/
 ---
 
 ## Contributors
-
+- **Jeremy** - BCIT CST Student with a goal to mix technology and art.
 - **Yann** - BCIT CST Student with a passion for Basketball.
 
 ---
