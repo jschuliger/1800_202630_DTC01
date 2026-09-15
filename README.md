@@ -63,6 +63,7 @@ elmo-hikes/
 ## Contributors
 
 - **Griffin** - BCIT CST Student with a passion for cats and volleyball.
+- **Jeremy** - BCIT CST Student with a passion for mixing technology with art.
 
 ---
 
