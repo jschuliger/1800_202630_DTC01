@@ -62,6 +62,7 @@ elmo-hikes/
 
 ## Contributors
 
+- **Griffin** - BCIT CST Student with a passion for everything cats and volleyball. Interests also include motorcycling and music.
 - **Jeremy** - BCIT CST Student with a goal to mix technology and art. Enjoys getting outside whenever he can.
 - **Yann** - BCIT CST Student with a passion for Basketball.
 
