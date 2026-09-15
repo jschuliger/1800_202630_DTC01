@@ -64,12 +64,11 @@ elmo-hikes/
 
 ---
 
-
 ## Contributors
+
 - **Yann** - BCIT CST Student with a passion for Basketball.
 
 ---
-
 
 ## Acknowledgments
 
