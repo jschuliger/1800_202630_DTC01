@@ -1,38 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App">
+  <head>
+    <title>Evergrow: Budget Better</title>
+    <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tailwind script -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Other libraries go here -->
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
 
+    <!-- Start of Navbar -->
     <nav class="flex justify-around bg-gray-200 py-4">
-        <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Home</a>
-        <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Finances</a>
-        <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Calendar</a>
-        <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Budget</a>
-        <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Profile</a>
-
-
-    
+      <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Home</a>
+      <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Finances</a>
+      <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Calendar</a>
+      <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Budget</a>
+      <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Profile</a>
     </nav>
+    <!-- End of Navbar -->
 
+    <!-- Start of Hero Section -->
+    <main class="block md:flex max-w-lg md:max-w-6xl mx-auto mt-4 gap-2">
+      <article class="px-4 py-5 my-5 text-center space-y-6">
+        <section class="space-y-2">
+          <img
+            class="block mx-auto mb-4"
+            src="https://static.vecteezy.com/system/resources/previews/027/292/422/original/money-tree-illustration-money-finance-money-saving-png.png"
+            alt=""
+            width="100"
+          />
+          <h1 class="text-4xl my-0">Welcome to Evergrow</h1>
+          <h3 class="text-gray-400">Save more, grow your future</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
+            minima voluptates odio adipisci soluta. Pariatur culpa blanditiis
+            aut, ea sequi, vero id cupiditate perferendis quibusdam nemo modi?
+            Vel, quaerat magni.
+          </p>
+          <div class="gap-2 d-sm-flex justify-content-sm-center">
+            <button
+              type="button"
+              class="bg-cyan-400 btn hover:bg-cyan-600 p-2 rounded"
+            >
+              My Portfolio
+            </button>
+            <button
+              type="button"
+              class="bg-gray-300 btn hover:bg-gray-500 p-2 rounded"
+            >
+              Learn More
+            </button>
+          </div>
+        </section>
+      </article>
+    </main>
+    <!-- End of Hero Section -->
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
@@ -40,7 +73,5 @@
 
     <!-- Link to scripts of your own -->
     <!-- <script type="module" src="./src/main.js"></script> -->
-
-</body>
-
+  </body>
 </html>
