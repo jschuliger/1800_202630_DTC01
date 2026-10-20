@@ -79,6 +79,11 @@ export async function logoutUser() {
 // If the user is on "main.html":
 //   - If logged in → displays "Hello, [Name]!"
 //   - If not logged in → redirects to "index.html"
+// Main.html not added yet
+//
+// If the user is on "homepage.html":
+//   - If logged in → displays "favourited portfolio"
+//   - If not logged in → redirects to "index.html"
 //
 // This function should be called once when the page loads.
 //
@@ -87,7 +92,7 @@ export async function logoutUser() {
 // -------------------------------------------------------------
 export function checkAuthState() {
   onAuthStateChanged(auth, (user) => {
-    if (window.location.pathname.endsWith("main.html")) {
+    if (window.location.pathname.endsWith("homepage.html")) {
       if (user) {
         const displayName = user.displayName || user.email;
         $("#welcomeMessage").text(`Hello, ${displayName}!`);
