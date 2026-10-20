@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+
+    <header class="bg-gray-300 flex justify-center p-6 items-center gap-4 relative">
+        <a href="index.html" class="absolute left-4">← Home</a>
+        <h1 class="font-bold">Expense</h1>
+    </header>
+
+    <main class="max-w-lg mx-auto p-4">
+        <p class="mb-4">Total spending: $250.00</p>
+
+        <section class="grid grid-cols-2 gap-4">
+            <div id="food-category" class="bg-gray-300 text-center p-6 rounded-lg cursor-pointer hover:bg-gray-500">
+                <h2>Food</h2>
+                <p>$100.00</p>
+            </div>
+            <div id="transport-category" class="bg-gray-300 text-center p-6 rounded-lg">
+                <h2>Transport</h2>
+                <p>$50.00</p>
+            </div><div class="bg-gray-300 text-center p-6 rounded-lg">
+                <h2>Entertainment</h2>
+                <p>$75.00</p>
+            </div><div class="bg-gray-300 text-center p-6 rounded-lg">
+                <h2>Other</h2>
+                <p>$25.00</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        const foodCard = $("#food-category");
+        
+        foodCard.on("click", function() {
+            console.log("Food clicked");
+        });
+
+        const transportCard = $("#transport-category");
+
+        transportCard.on("click", function() {
+            console.log("Transport clicked")
+        });
+
+
+    </script>
+    
+</body>
+</html>
