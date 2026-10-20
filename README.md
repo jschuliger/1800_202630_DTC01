@@ -1,8 +1,8 @@
-# Elmo Hikes
+# Evergrow: Financial Tracker
 
 ## Overview
 
-Elmo Hikes is a client-side JavaScript web application that helps users discover and explore hiking trails. The app displays a curated list of hike trails, each with details such as name, location, difficulty, and an image. Users can browse the list and mark their favorite trails for easy access later.
+Evergrow is a client-side JavaScript web application that helps users track their money in a safe a secure place. Users can create personal portfolios where they can add, edit, and categorize incomes and expenses. The app displays a simple, clear list of added incomes and expenses and generates graphs to represent past, current, and projected savings. Users can create multiple portfolios, set spending limits, and receive spending notifications all in one place.
 
 Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user favorites.
 
@@ -10,10 +10,13 @@ Developed for the COMP 1800 course, this project applies User-Centred Design pra
 
 ## Features
 
-- Browse a list of curated hiking trails with images and details
-- Mark and unmark trails as favorites
-- View a personalized list of favorite hikes
-- Responsive design for desktop and mobile
+- Add, edit, and categorize incomes and expenditures
+- View a numerical summary of incomes and expenses over a specified period.
+- View a graphical summary of incomes and expenses over a specified period.
+- Set spending limits over a specified period
+- Set personalized notifications and reminders for set limits
+- Navigate a calendar of past incomes and expenses
+- Responsive design for mobile-first, and desktop users
 
 ---
 
@@ -36,7 +39,7 @@ To run the application locally:
 4.  Open your browser and visit the local address shown in your terminal (usually `http://localhost:5173` or similar).
 
 Once the application is running:
-
+# To be updated
 1.  Browse the list of hiking trails displayed on the main page.
 2.  Click the heart icon (or similar) to mark a trail as a favorite.
 3.  View your favorite hikes in the favorites section.
@@ -44,8 +47,9 @@ Once the application is running:
 ---
 
 ## Project Structure
-
+# To be updated
 ```
+
 elmo-hikes/
 ├── src/
 │   ├── main.js
@@ -69,7 +73,7 @@ elmo-hikes/
 ---
 
 ## Acknowledgments
-
+# To be updated
 - Trail data and images are for demonstration purposes only.
 - Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
 - Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
@@ -77,7 +81,7 @@ elmo-hikes/
 ---
 
 ## Limitations and Future Work
-
+# To be updated
 ### Limitations
 
 - Limited trail details (e.g., no live trail conditions).

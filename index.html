@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Evergrow: Budget Better</title>
+    <title>Evergrow: Save Smarter</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
@@ -26,6 +26,7 @@
       <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Budget</a>
       <a href="#" class="hover:text-white hover:bg-black px-3 py-2">Profile</a>
       <div class="flex">
+        <!-- <button
         <button
           type="button"
           class="flex justify-start hover:bg-green-600 hover:border-transparent p-2 rounded border-green-400"
@@ -34,12 +35,13 @@
           Log in
         </button>
         <button
+          onclick="window.location.href = 'login.html'"
           type="button"
           class="flex justify-end bg-green-400 hover:bg-green-600 p-2 rounded"
           style="margin: 2px"
         >
-          Sign up
-        </button>
+          Log in
+        </button> -->
       </div>
     </nav>
     <!-- End of Navbar -->
@@ -63,9 +65,9 @@
             Vel, quaerat magni.
           </p>
           <div class="gap-2 d-sm-flex justify-content-sm-center">
-            <button
+            <!-- <button
               type="button"
-              class="bg-cyan-300 hover:bg-cyan-600 p-2 rounded"
+              class="bg-green-400 hover:bg-cyan-600 p-2 rounded"
             >
               My Portfolio
             </button>
@@ -74,17 +76,18 @@
               class="bg-gray-300 hover:bg-gray-500 p-2 rounded"
             >
               Learn More
-            </button>
+            </button> -->
             <div style="margin: 10px">
-              <p style="font-size: small; color: grey">
-                Don't have an account?
-              </p>
               <button
+                onclick="window.location.href = 'login.html'"
                 type="button"
                 class="bg-green-400 hover:bg-green-600 p-2 rounded"
               >
-                Sign Up
+                Login
               </button>
+              <!-- <p style="font-size: small; color: grey">
+                Log into your account
+              </p>               -->
             </div>
           </div>
         </section>
