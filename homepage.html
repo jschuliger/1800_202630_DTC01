@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="homepage.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <!-- Portfolio name, balance, and hamburger menu -->
+    <main class="flex flex-col justify-center items-center">
+      <div>
+        <p class="text-center text-5xl mt-20 font-bold">My Portfolio</p>
+        <p class="text-center text-5xl mt-4 font-semibold">$000.00</p>
+        <img
+          class="fixed top-20 left-10"
+          src="svgs/hamburger_menu.svg"
+          alt=""
+          width="60"
+          height="60"
+        />
+      </div>
+      <!-- Graph -->
+      <div class="flex justify-center m-20">
+        <img src="add graph source here" alt="" width="400" height="300" />
+      </div>
+      <!-- Quick finance view area -->
+      <div class="flex flex-col max-w-3xl border-2 rounded-2xl min-w-2xl">
+        <div class="flex items-center justify-center mb-10">
+          <img src="svgs/chevron_left.svg" alt="" width="40" height="40" />
+          <p class="text-2xl font-semibold">This Month</p>
+        </div>
+        <!-- Net expected -->
+        <div class="flex flex-col mb-10 p-2">
+          <p class="text-2xl ml-2 font-semibold">Net Expected</p>
+          <div class="flex justify-between items-center">
+            <p class="text-3xl ml-2">+$000.00</p>
+            <p class="text-2xl mr-2">($000.00 - $000.00)</p>
+          </div>
+        </div>
+        <!-- Income -->
+        <div class="mb-8 border-2 rounded-2xl flex justify-between p-3">
+          <div class="flex flex-col items-start">
+            <p class="text-2xl ml-2 font-semibold">Income</p>
+            <p class="text-3xl ml-2">$000.00</p>
+          </div>
+          <div class="flex">
+            <img src="svgs/add_plus.svg" alt="" width="40" height="40" /><img
+              src="svgs/arrow_down.svg"
+              alt=""
+              width="40"
+              height="40"
+            />
+          </div>
+        </div>
+        <!-- Expenses -->
+        <div class="mb-8 border-2 rounded-2xl flex justify-between p-3">
+          <div class="flex flex-col items-start">
+            <p class="text-2xl ml-2 font-semibold">Expenses</p>
+            <p class="text-3xl ml-2">$000.00</p>
+          </div>
+          <div class="flex">
+            <img src="svgs/add_plus.svg" alt="" width="40" height="40" /><img
+              src="svgs/arrow_down.svg"
+              alt=""
+              width="40"
+              height="40"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
