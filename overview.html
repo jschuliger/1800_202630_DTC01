@@ -21,150 +21,137 @@
       />
     </svg>
     <!-- Overview and month change -->
-    <div class="d-flex flex-column align-items-center">
-      <h1>Overview</h1>
-      <div class="bg-success-subtle d-flex align-items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill="#000000"
-          id="left-arrow"
-        >
-          <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
-        </svg>
-        <p id="month">month</p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill="#000000"
-          style="transform: rotate(180deg)"
-          id="right-arrow"
-        >
-          <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
-        </svg>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center fs-1">
-      <p id="net-worth">$000.00</p>
-    </div>
-    <!-- Donut chart and buttons -->
-    <section class="d-flex flex-column align-items-center gap-4">
-      <div
-        class="btn-group"
-        role="group"
-        aria-label="Basic radio toggle button group"
-        id="donut-type"
-      >
-        <input
-          type="radio"
-          class="btn-check"
-          name="donut-types"
-          id="donut-incomes"
-          value="incomes"
-          checked
-        />
-        <label class="btn btn-outline-success" for="donut-incomes"
-          >Income</label
-        >
-        <input
-          type="radio"
-          class="btn-check"
-          name="donut-types"
-          id="donut-expenses"
-          value="expenses"
-        />
-        <label class="btn btn-outline-success" for="donut-expenses"
-          >Expenses</label
-        >
-        <input
-          type="radio"
-          class="btn-check"
-          name="donut-types"
-          id="donut-net-worth"
-          value="net-worth"
-        />
-        <label class="btn btn-outline-success" for="donut-net-worth"
-          >Net Worth</label
-        >
-      </div>
-      <!-- Donut chart -->
-      <div>
-        <canvas id="donut-chart"></canvas>
-      </div>
-    </section>
-    <!-- Accordion menu -->
-    <section>
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button fs-1"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapseOne"
-              aria-expanded="true"
-              aria-controls="panelsStayOpen-collapseOne"
-            >
-              <div>
-                <p>Incomes</p>
-                <p id="accordion-incomes">$000.00</p>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="panelsStayOpen-collapseOne"
-            class="accordion-collapse collapse show"
+    <main class="p-5">
+      <div class="d-flex flex-column align-items-center">
+        <h1 style="font-size: 3em">Overview</h1>
+        <div class="bg-success-subtle d-flex align-items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#000000"
+            id="left-arrow"
           >
-            <div class="accordion-body">
-              <strong>This is the first item’s accordion body.</strong> It is
-              shown by default, until the collapse plugin adds the appropriate
-              classes that we use to style each element. These classes control
-              the overall appearance, as well as the showing and hiding via CSS
-              transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It’s also worth noting that just
-              about any HTML can go within the <code>.accordion-body</code>,
-              though the transition does limit overflow.
+            <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+          </svg>
+          <p id="month">month</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#000000"
+            style="transform: rotate(180deg)"
+            id="right-arrow"
+          >
+            <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+          </svg>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center fs-1">
+        <p id="net-worth">$000.00</p>
+      </div>
+      <!-- Donut chart and buttons -->
+      <section class="d-flex flex-column align-items-center gap-4">
+        <div
+          class="btn-group"
+          role="group"
+          aria-label="Basic radio toggle button group"
+          id="donut-type"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="donut-types"
+            id="donut-incomes"
+            value="incomes"
+            checked
+          />
+          <label class="btn btn-outline-success" for="donut-incomes"
+            >Income</label
+          >
+          <input
+            type="radio"
+            class="btn-check"
+            name="donut-types"
+            id="donut-expenses"
+            value="expenses"
+          />
+          <label class="btn btn-outline-success" for="donut-expenses"
+            >Expenses</label
+          >
+          <input
+            type="radio"
+            class="btn-check"
+            name="donut-types"
+            id="donut-net-worth"
+            value="net-worth"
+          />
+          <label class="btn btn-outline-success" for="donut-net-worth"
+            >Net Worth</label
+          >
+        </div>
+        <!-- Donut chart -->
+        <div>
+          <canvas id="donut-chart"></canvas>
+        </div>
+      </section>
+      <!-- Accordion menu -->
+      <section>
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button fs-1"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne"
+                aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseOne"
+              >
+                <div>
+                  <p>Incomes</p>
+                  <p id="accordion-incomes">$000.00</p>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseOne"
+              class="accordion-collapse collapse show"
+            >
+              <div
+                class="accordion-body pt-0"
+                id="accordion-incomes-body"
+              ></div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed fs-1"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseTwo"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseTwo"
+              >
+                <div>
+                  <p>Expenses</p>
+                  <p id="accordion-expenses">$000.00</p>
+                </div>
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseTwo"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body" id="accordion-expenses-body"></div>
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed fs-1"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapseTwo"
-              aria-expanded="false"
-              aria-controls="panelsStayOpen-collapseTwo"
-            >
-              <div>
-                <p>Expenses</p>
-                <p id="accordion-incomes">$000.00</p>
-              </div>
-            </button>
-          </h2>
-          <div
-            id="panelsStayOpen-collapseTwo"
-            class="accordion-collapse collapse"
-          >
-            <div class="accordion-body">
-              <strong>This is the second item’s accordion body.</strong> It is
-              hidden by default, until the collapse plugin adds the appropriate
-              classes that we use to style each element. These classes control
-              the overall appearance, as well as the showing and hiding via CSS
-              transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It’s also worth noting that just
-              about any HTML can go within the <code>.accordion-body</code>,
-              though the transition does limit overflow.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <script type="module" src="/src/app.js"></script>
   </body>

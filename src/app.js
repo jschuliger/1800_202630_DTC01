@@ -174,6 +174,49 @@ async function setValues() {
     `$${netIncome.toFixed(2)}`;
   document.getElementById("accordion-expenses").textContent =
     `$${netExpense.toFixed(2)}`;
+
+  const totalIncomeByCategory = incomeData.reduce((accumulator, item) => {
+    let { category, amount } = item;
+    if (!accumulator[category]) {
+      accumulator[category] = 0;
+    }
+    accumulator[category] += amount;
+    return accumulator;
+  }, {});
+
+  for (const [key, value] of Object.entries(totalIncomeByCategory)) {
+    document.getElementById("accordion-incomes-body").insertAdjacentHTML(
+      "afterend",
+      `
+    <div class="d-flex justify-content-between">
+      <p>${key}</p>
+      <p>$${value.toFixed(2)}</p>
+    </div>
+  
+    `,
+    );
+  }
+  const totalExpenseByCategory = expenseData.reduce((accumulator, item) => {
+    let { category, amount } = item;
+    if (!accumulator[category]) {
+      accumulator[category] = 0;
+    }
+    accumulator[category] += amount;
+    return accumulator;
+  }, {});
+
+  for (const [key, value] of Object.entries(totalExpenseByCategory)) {
+    document.getElementById("accordion-expenses-body").insertAdjacentHTML(
+      "afterend",
+      `
+    <div class="d-flex justify-content-between">
+      <p>${key}</p>
+      <p>$${value.toFixed(2)}</p>
+    </div>
+  
+    `,
+    );
+  }
 }
 
 setValues();
