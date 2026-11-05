@@ -54,8 +54,8 @@ function switchMonth() {
 }
 switchMonth();
 
-// Returns an array of expense dicts
-function getExpenses() {
+// Returns an array of incomes or expenses dicts
+function getData(type = "incomes") {
   return new Promise((resolve, reject) => {
     onAuthReady(async (user) => {
       if (!user) {
@@ -65,62 +65,46 @@ function getExpenses() {
       }
 
       try {
-        const subcollectionRef = collection(db, "users", user.uid, "expenses");
+        const subcollectionRef = collection(db, "users", user.uid, type);
         const querySnapshot = await getDocs(subcollectionRef);
-        let expensesArray = [];
+        let dataArray = [];
 
         querySnapshot.forEach((doc) => {
-          expensesArray.push(doc.data());
+          dataArray.push(doc.data());
         });
 
-        resolve(expensesArray);
+        resolve(dataArray);
       } catch (error) {
-        console.error("Error fetching expenses: ", error);
+        console.error("Error fetching data: ", error);
         reject(error);
       }
     });
   });
 }
 
-getExpenses();
+getData();
 
-// Returns an array of income dicts
-function getIncomes() {
-  onAuthReady(async (user) => {
-    try {
-      // Get expenses subcollection
-      const subcollectionRef = collection(db, "users", user.uid, "incomes");
-      const querySnapshot = await getDocs(subcollectionRef);
-      let incomesArray = [];
-
-      querySnapshot.forEach((doc) => {
-        incomesArray.push(doc.data());
-      });
-    } catch (error) {
-      console.error("Error fetching incomes: ", error);
-    }
-  });
-}
-
-getIncomes();
-
-async function setDonutChartIncome() {
+async function setDonutChart(type = "incomes") {
   try {
-    const expenses = await getExpenses();
+    let chartData = [];
+    if (type === "incomes" || type === "expenses") {
+      chartData = await getData(type);
+    } else {
+      chartData = await getExpenses();
+    }
+    if (!chartData) return;
 
-    if (!expenses || !Array.isArray(expenses)) return;
-
-    const expenseCategoryTotals = expenses.map((expense) => expense.amount);
-    const expenseCategories = expenses.map((expense) => expense.category);
+    const dataCategoryTotals = chartData.map((data) => data.amount);
+    const dataCategories = chartData.map((data) => data.category);
 
     let donutChart = new Chart("donut-chart", {
       type: "doughnut",
       data: {
-        labels: expenseCategories,
+        labels: dataCategories,
         datasets: [
           {
             label: "",
-            data: expenseCategoryTotals,
+            data: dataCategoryTotals,
             backgroundColor: [
               "rgb(255, 99, 132)", // Pink
               "rgb(54, 162, 235)", // Blue
@@ -140,7 +124,6 @@ async function setDonutChartIncome() {
           },
           title: {
             display: false,
-            text: "Expenses",
           },
         },
       },
@@ -151,4 +134,4 @@ async function setDonutChartIncome() {
     console.error("Failed to set donut chart:", error);
   }
 }
-setDonutChartIncome();
+setDonutChart();
