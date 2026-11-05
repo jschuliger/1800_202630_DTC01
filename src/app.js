@@ -87,15 +87,29 @@ getData();
 async function setDonutChart(type = "incomes") {
   try {
     let chartData = [];
+    let dataCategoryTotals = [];
+    let dataCategories = [];
     if (type === "incomes" || type === "expenses") {
       chartData = await getData(type);
+      dataCategoryTotals = chartData.map((data) => data.amount);
+      dataCategories = chartData.map((data) => data.category);
     } else {
-      chartData = await getExpenses();
+      let dataIncomes = await getData("incomes");
+      let dataExpenses = await getData("expenses");
+      dataCategoryTotals = [
+        ...dataIncomes.map((data) => data.amount),
+        ...dataExpenses.map((data) => data.amount),
+      ];
+      let dataIncomeCategories = await getData("incomes");
+      let dataExpenseCategories = await getData("expenses");
+      dataCategories = [
+        ...dataIncomeCategories.map((data) => data.category),
+        ...dataExpenseCategories.map((data) => data.category),
+      ];
+      console.log(dataCategories);
+      console.log(dataCategoryTotals);
     }
     if (!chartData) return;
-
-    const dataCategoryTotals = chartData.map((data) => data.amount);
-    const dataCategories = chartData.map((data) => data.category);
 
     let donutChart = new Chart("donut-chart", {
       type: "doughnut",
@@ -134,4 +148,4 @@ async function setDonutChart(type = "incomes") {
     console.error("Failed to set donut chart:", error);
   }
 }
-setDonutChart();
+setDonutChart("a");
