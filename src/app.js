@@ -84,6 +84,7 @@ function getData(type = "incomes") {
 
 getData();
 
+// Set initial data for donut chart, and add functionality to radio buttons
 async function setDonutChart(type = "incomes") {
   try {
     let chartData = [];
@@ -103,7 +104,6 @@ async function setDonutChart(type = "incomes") {
 
     const existingChart = Chart.getChart("donut-chart");
     if (existingChart) {
-      // existingChart.destroy();
       existingChart.data.labels = dataCategories;
       existingChart.data.datasets[0].data = dataCategoryTotals;
       existingChart.update();
@@ -141,19 +141,18 @@ async function setDonutChart(type = "incomes") {
         },
       },
     });
-
-    // Code to initialize your ChartJS instance goes here...
   } catch (error) {
     console.error("Failed to set donut chart:", error);
   }
+
+  // Radio button functionality for donut chart
+  document.getElementById("donut-type").addEventListener("change", (event) => {
+    setDonutChart(event.target.value);
+  });
 }
 setDonutChart("incomes");
 
-// Radio button functionality for donut chart
-document.getElementById("donut-type").addEventListener("change", (event) => {
-  setDonutChart(event.target.value);
-});
-
+// Set all inital values for accordion dropdown menu
 async function setValues() {
   let incomeData = await getData("incomes");
   let expenseData = await getData("expenses");
@@ -188,7 +187,7 @@ async function setValues() {
     document.getElementById("accordion-incomes-body").insertAdjacentHTML(
       "afterend",
       `
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
       <p>$${value.toFixed(2)}</p>
     </div>
@@ -209,7 +208,7 @@ async function setValues() {
     document.getElementById("accordion-expenses-body").insertAdjacentHTML(
       "afterend",
       `
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
       <p>$${value.toFixed(2)}</p>
     </div>
