@@ -48,11 +48,11 @@
         </svg>
       </div>
     </div>
-    <div>
-      <p>$000.00</p>
+    <div class="d-flex justify-content-center fs-1">
+      <p id="net-worth">$000.00</p>
     </div>
     <!-- Donut chart and buttons -->
-    <section class="d-flex flex-column align-items-center">
+    <section class="d-flex flex-column align-items-center gap-4">
       <div
         class="btn-group"
         role="group"
@@ -65,7 +65,6 @@
           name="donut-types"
           id="donut-incomes"
           value="incomes"
-          autocomplete="off"
           checked
         />
         <label class="btn btn-outline-success" for="donut-incomes"
@@ -77,7 +76,6 @@
           name="donut-types"
           id="donut-expenses"
           value="expenses"
-          autocomplete="off"
         />
         <label class="btn btn-outline-success" for="donut-expenses"
           >Expenses</label
@@ -88,7 +86,6 @@
           name="donut-types"
           id="donut-net-worth"
           value="net-worth"
-          autocomplete="off"
         />
         <label class="btn btn-outline-success" for="donut-net-worth"
           >Net Worth</label
@@ -99,7 +96,75 @@
         <canvas id="donut-chart"></canvas>
       </div>
     </section>
-    <p id="name-goes-here">expenses</p>
+    <!-- Accordion menu -->
+    <section>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button fs-1"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne"
+              aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne"
+            >
+              <div>
+                <p>Incomes</p>
+                <p id="accordion-incomes">$000.00</p>
+              </div>
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseOne"
+            class="accordion-collapse collapse show"
+          >
+            <div class="accordion-body">
+              <strong>This is the first item’s accordion body.</strong> It is
+              shown by default, until the collapse plugin adds the appropriate
+              classes that we use to style each element. These classes control
+              the overall appearance, as well as the showing and hiding via CSS
+              transitions. You can modify any of this with custom CSS or
+              overriding our default variables. It’s also worth noting that just
+              about any HTML can go within the <code>.accordion-body</code>,
+              though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed fs-1"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo"
+            >
+              <div>
+                <p>Expenses</p>
+                <p id="accordion-incomes">$000.00</p>
+              </div>
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseTwo"
+            class="accordion-collapse collapse"
+          >
+            <div class="accordion-body">
+              <strong>This is the second item’s accordion body.</strong> It is
+              hidden by default, until the collapse plugin adds the appropriate
+              classes that we use to style each element. These classes control
+              the overall appearance, as well as the showing and hiding via CSS
+              transitions. You can modify any of this with custom CSS or
+              overriding our default variables. It’s also worth noting that just
+              about any HTML can go within the <code>.accordion-body</code>,
+              though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <script type="module" src="/src/app.js"></script>
   </body>

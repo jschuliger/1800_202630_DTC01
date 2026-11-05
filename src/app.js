@@ -149,6 +149,31 @@ async function setDonutChart(type = "incomes") {
 }
 setDonutChart("incomes");
 
+// Radio button functionality for donut chart
 document.getElementById("donut-type").addEventListener("change", (event) => {
   setDonutChart(event.target.value);
 });
+
+async function setValues() {
+  let incomeData = await getData("incomes");
+  let expenseData = await getData("expenses");
+
+  let netIncome = 0;
+  incomeData.forEach((income) => {
+    netIncome += income.amount;
+  });
+
+  let netExpense = 0;
+  expenseData.forEach((expense) => {
+    netExpense += expense.amount;
+  });
+  let netWorth = netIncome - netExpense;
+  // Set net worth amount
+  document.getElementById("net-worth").textContent = `$${netWorth.toFixed(2)}`;
+  document.getElementById("accordion-incomes").textContent =
+    `$${netIncome.toFixed(2)}`;
+  document.getElementById("accordion-expenses").textContent =
+    `$${netExpense.toFixed(2)}`;
+}
+
+setValues();
