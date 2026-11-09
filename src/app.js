@@ -31,25 +31,34 @@ function checkImports() {
 }
 document.addEventListener("DOMContentLoaded", checkImports);
 
-function setMonth(month_num = -1) {
-  if (month_num === -1) {
-    const currentMonth = new Date().toLocaleString("default", {
+
+// Clickable month navigation
+
+let currentDate = new Date();
+currentDate.setDate(1);
+
+function displayMonth() {
+  
+    const currentMonth = currentDate.toLocaleString("default", {
       month: "long",
     });
     document.getElementById("month").textContent = currentMonth;
-  } else {
-    document.getElementById("month").textContent = month_num;
-  }
+   
 }
-setMonth();
+displayMonth();
 
 function switchMonth() {
   const leftArrow = document.getElementById("left-arrow");
   const rightArrow = document.getElementById("right-arrow");
-  const month = document.getElementById("month");
 
   leftArrow.addEventListener("click", () => {
-    setMonth(2);
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    displayMonth();
+  });
+
+  rightArrow.addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    displayMonth();
   });
 }
 switchMonth();
