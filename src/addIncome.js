@@ -31,7 +31,10 @@ async function submitIncome(event) {
 
     // 2. Save it to the "incomes" collection
     try {
-        await addDoc(collection(db, "incomes"), newIncome);
+        await addDoc(
+          collection(db, "users", currentUser.uid, "incomes"),
+          newIncome,
+        );
         location.href = "overview.html";    // 3. Go look at the new income
     } catch (error) {
         alert(`Error submitting income:\n${error.code || ""}\n${error.message || error}`);
