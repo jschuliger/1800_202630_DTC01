@@ -29,7 +29,7 @@
         <form id="addIncomeForm" novalidate>
             <div class="mb-3">
                 <label for="incomeAmountInput" class="form-label">Amount</label>
-                <input type="text" id="incomeAmountInput" class="form-control" placeholder="0.00" required />
+                <input type="number" id="incomeAmountInput" class="form-control" placeholder="0.00" required />
             </div>
             <div class="mb-3">
                 <label for="incomeCategoryInput" class="form-label">Category</label>
@@ -62,6 +62,42 @@
     <script>
         document.getElementById("incomeDate").value =
             new Date().toISOString().split("T")[0];
+    </script>
+    <script>
+        (function() {
+            const input = document.getElementById('incomeAmountInput');
+            let rawValue = ''; // stores digits only
+
+            input.addEventListener('input', function(e) {
+                // Remove all non-digit characters
+                rawValue = this.value.replace(/\D/g, '');
+
+                // If empty, show 0.00
+                if (rawValue.length === 0) {
+                    this.value = '0.00';
+                    return;
+                }
+
+                // Convert to cents and format
+                let cents = parseInt(rawValue, 10);
+                let formatted = (cents / 100).toFixed(2);
+
+                this.value = formatted;
+            });
+
+            // Optional: prevent non-digit typing except control keys
+            input.addEventListener('keydown', function(e) {
+                const allowedKeys = [
+                    'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'
+                ];
+                if (!allowedKeys.includes(e.key) && !/\d/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            // Initialize
+            input.value = '0.00';
+        })();
     </script>
 
 </body>
