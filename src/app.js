@@ -177,11 +177,12 @@ async function setValues() {
   });
   let netWorth = netIncome - netExpense;
   // Set net worth amount
-  document.getElementById("net-worth").textContent = `$${netWorth.toFixed(2)}`;
+  document.getElementById("net-worth").textContent =
+    `$${(netWorth / 100).toFixed(2)}`;
   document.getElementById("accordion-incomes").textContent =
-    `$${netIncome.toFixed(2)}`;
+    `$${(netIncome / 100).toFixed(2)}`;
   document.getElementById("accordion-expenses").textContent =
-    `$${netExpense.toFixed(2)}`;
+    `$${(netExpense / 100).toFixed(2)}`;
 
   const totalIncomeByCategory = incomeData.reduce((accumulator, item) => {
     let { category, amount } = item;
@@ -198,7 +199,7 @@ async function setValues() {
       `
     <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
-      <p>$${value.toFixed(2)}</p>
+      <p>$${(value / 100).toFixed(2)}</p>
     </div>
   
     `,
@@ -219,7 +220,7 @@ async function setValues() {
       `
     <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
-      <p>$${value.toFixed(2)}</p>
+      <p>$${(value / 100).toFixed(2)}</p>
     </div>
   
     `,
