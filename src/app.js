@@ -63,6 +63,23 @@ function switchMonth() {
 }
 switchMonth();
 
+// Hamburger icon effect
+function mobileMenu() {
+  const hamburger = document.getElementById("hamburger-menu");
+  const sideNavbar = document.getElementById("side-navbar");
+
+  if (!hamburger || !sideNavbar) return;
+
+  hamburger.addEventListener("click", () => {
+
+    sideNavbar.classList.toggle("d-none");
+
+  });
+
+
+}
+mobileMenu();
+
 // Returns an array of incomes or expenses dicts
 function getData(type = "incomes") {
   return new Promise((resolve, reject) => {
