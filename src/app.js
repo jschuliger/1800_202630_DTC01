@@ -31,19 +31,16 @@ function checkImports() {
 }
 document.addEventListener("DOMContentLoaded", checkImports);
 
-
 // Clickable month navigation
 
 let currentDate = new Date();
 currentDate.setDate(1);
 
 function displayMonth() {
-  
-    const currentMonth = currentDate.toLocaleString("default", {
-      month: "long",
-    });
-    document.getElementById("month").textContent = currentMonth;
-   
+  const currentMonth = currentDate.toLocaleString("default", {
+    month: "long",
+  });
+  document.getElementById("month").textContent = currentMonth;
 }
 displayMonth();
 
@@ -55,7 +52,9 @@ function switchMonth() {
     currentDate.setMonth(currentDate.getMonth() - 1);
     displayMonth();
     setValues();
-    const selectedType = document.querySelector("#donut-type input:checked").value;
+    const selectedType = document.querySelector(
+      "#donut-type input:checked",
+    ).value;
     setDonutChart(selectedType);
   });
 
@@ -63,7 +62,9 @@ function switchMonth() {
     currentDate.setMonth(currentDate.getMonth() + 1);
     displayMonth();
     setValues();
-    const selectedType = document.querySelector("#donut-type input:checked").value;
+    const selectedType = document.querySelector(
+      "#donut-type input:checked",
+    ).value;
     setDonutChart(selectedType);
   });
 }
@@ -73,11 +74,30 @@ switchMonth();
 function isInSelectedMonth(item) {
   if (!item.date) return false;
 
-  const [year, month] = item.date.split("-").map(Number);
+  let year, month;
 
-  return year === currentDate.getFullYear() && month === currentDate.getMonth() + 1;
-
-
+  if (typeof item.date === "string") {
+    // Handles "YYYY-MM-DD" or ISO strings like "2026-11-16T00:00:00Z"
+    [year, month] = item.date.split("T")[0].split("-").map(Number);
+  } else if (item.date instanceof Date) {
+    // Handles standard JavaScript Date objects
+    year = item.date.getFullYear();
+    month = item.date.getMonth() + 1;
+  } else if (typeof item.date.toDate === "function") {
+    // Handles Firebase/Firestore Timestamps
+    const dateObj = item.date.toDate();
+    year = dateObj.getFullYear();
+    month = dateObj.getMonth() + 1;
+  } else {
+    // Fallback for numeric timestamps (e.g., 1731798000000)
+    const dateObj = new Date(item.date);
+    if (isNaN(dateObj.getTime())) return false;
+    year = dateObj.getFullYear();
+    month = dateObj.getMonth() + 1;
+  }
+  return (
+    year === currentDate.getFullYear() && month === currentDate.getMonth() + 1
+  );
 }
 // Hamburger icon effect
 function mobileMenu() {
@@ -87,12 +107,8 @@ function mobileMenu() {
   if (!hamburger || !sideNavbar) return;
 
   hamburger.addEventListener("click", () => {
-
     sideNavbar.classList.toggle("d-none");
-
   });
-
-
 }
 mobileMenu();
 
@@ -139,7 +155,7 @@ async function setDonutChart(type = "incomes") {
       ]);
       chartData = [...incomes, ...expenses];
     }
-    
+
     chartData = chartData.filter(isInSelectedMonth);
 
     let dataCategoryTotals = chartData.map((data) => data.amount);
