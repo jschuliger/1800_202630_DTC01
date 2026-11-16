@@ -1,51 +1,82 @@
 import { db } from "./firebaseConfig.js";
 import { onAuthReady } from "./authentication.js";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
 // Remember the logged-in user so we can save their ID with the hike
 let currentUser = null;
 
-onAuthReady(function (user) {
+onAuthReady(async function (user) {
   if (!user) {
-    location.href = "index.html"; // Not logged in → go away
+    location.href = "index.html";
     return;
   }
-  currentUser = user; // Logged in → remember them
-});
 
+  currentUser = user;
+
+  const params = new URLSearchParams(window.location.search);
+  const incomeId = params.get("id");
+
+  if (!incomeId) return;
+
+  const incomeRef = doc(db, "users", currentUser.uid, "incomes", incomeId);
+
+  const incomeSnap = await getDoc(incomeRef);
+
+  if (incomeSnap.exists()) {
+    const income = incomeSnap.data();
+
+    document.getElementById("incomeAmountInput").value = income.amount || "";
+
+    document.getElementById("incomeCategoryInput").value =
+      income.category || "";
+
+    document.getElementById("incomeDate").value = income.date || "";
+
+    document.getElementById("incomeDescription").value =
+      income.description || "";
+  }
+});
 
 // ---- (1) What to do when the form is submitted ----
 async function editIncome(event) {
-  event.preventDefault(); // Stop the browser from reloading the page
+  event.preventDefault();
 
-  // 1. Collect the form values into ONE object (this becomes the Firestore document)
+  const params = new URLSearchParams(window.location.search);
+  const incomeId = params.get("id");
+
   let amount = document.getElementById("incomeAmountInput").value;
   amount = Number(amount.replace(".", ""));
-console.log(amount);
-console.log(typeof amount);
+
   const updatedIncome = {
-    amount: amount,
+    amount,
     category: document.getElementById("incomeCategoryInput").value,
     date: document.getElementById("incomeDate").value,
-    description: document.getElementById("incomeDescription").value, //
-    owner: currentUser.uid, // WHO added it
+    description: document.getElementById("incomeDescription").value,
+    owner: currentUser.uid,
     ownerName: currentUser.displayName || currentUser.email,
-    last_updated: serverTimestamp(), // WHEN it was added
+    last_updated: serverTimestamp(),
   };
 
-  // 2. Save it to the "incomes" collection
   try {
-    await updateDoc(
-      collection(db, "users", currentUser.uid, "incomes"),
-      updatedIncome,
+    const incomeRef = doc(
+      db,
+      "users",
+      currentUser.uid,
+      "incomes",
+      incomeId
     );
-    location.href = "overview.html"; // 3. Go look at the new income
+
+    await updateDoc(incomeRef, updatedIncome);
+
+    location.href = "finances.html";
   } catch (error) {
     alert(
-      `Error submitting income:\n${error.code || ""}\n${error.message || error}`,
+      `Error updating income:\n${error.code || ""}\n${error.message || error}`
     );
   }
 }
 
 // ---- (2) Connect it: "form, when you are submitted, run saveHike" ----
-document.getElementById("editIncomeForm").addEventListener("submit", editIncome);
+document
+  .getElementById("editIncomeForm")
+  .addEventListener("submit", editIncome);
