@@ -54,15 +54,31 @@ function switchMonth() {
   leftArrow.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     displayMonth();
+    setValues();
+    const selectedType = document.querySelector("#donut-type input:checked").value;
+    setDonutChart(selectedType);
   });
 
   rightArrow.addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
     displayMonth();
+    setValues();
+    const selectedType = document.querySelector("#donut-type input:checked").value;
+    setDonutChart(selectedType);
   });
 }
 switchMonth();
 
+// Checks the month
+function isInSelectedMonth(item) {
+  if (!item.date) return false;
+
+  const [year, month] = item.date.split("-").map(Number);
+
+  return year === currentDate.getFullYear() && month === currentDate.getMonth() + 1;
+
+
+}
 // Hamburger icon effect
 function mobileMenu() {
   const hamburger = document.getElementById("hamburger-menu");
@@ -123,7 +139,8 @@ async function setDonutChart(type = "incomes") {
       ]);
       chartData = [...incomes, ...expenses];
     }
-    if (!chartData || chartData.length === 0) return;
+    
+    chartData = chartData.filter(isInSelectedMonth);
 
     let dataCategoryTotals = chartData.map((data) => data.amount);
     let dataCategories = chartData.map((data) => data.category);
@@ -182,6 +199,9 @@ setDonutChart("incomes");
 async function setValues() {
   let incomeData = await getData("incomes");
   let expenseData = await getData("expenses");
+
+  incomeData = incomeData.filter(isInSelectedMonth);
+  expenseData = expenseData.filter(isInSelectedMonth);
 
   let netIncome = 0;
   incomeData.forEach((income) => {
