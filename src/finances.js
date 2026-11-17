@@ -108,7 +108,7 @@ async function displayTransactions() {
                         <p style="margin: 0px">${displayDate}</p>
                     </div>
                     <div class="align-items-center d-flex flex-nowrap" style="float: right; color: ${color}; font-weight: medium; font-size: 1.5rem;">
-                        ${sign}$${item.amount ?? 0}
+                        ${sign}$${((item.amount ?? 0) / 100).toFixed(2)}
                     </div>
                 </div>
             `;
