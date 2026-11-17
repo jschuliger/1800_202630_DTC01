@@ -2,7 +2,7 @@ class AccordionMenu extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
     <section class="mt-5">
-        <div class="accordion d-md-none" id="accordionPanelsStayOpenExample">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button

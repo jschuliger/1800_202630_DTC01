@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finances</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+    <style>
+      @media (max-width: 768px) {
+        #side-navbar {
+          position: fixed;
+          top: 120px;
+          left: 16px;
+          z-index: 1000;
+          box-shadow: 5px 5px 0 #000;
+        }
+        #hamburger-menu {
+          box-shadow: 5px 5px 0 #000;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Desktop view is flexbox -->
     <div class="d-md-flex vh-md-100" style="height: 100vh">
       <!-- Hamburger menu (mobile) -->
       <svg
-        xmlns="http://w3.org"
+        id="hamburger-menu"
+        role="button"
+        xmlns="http://www.w3.org/2000/svg"
         height="70px"
         viewBox="0 -960 960 960"
         width="70px"
