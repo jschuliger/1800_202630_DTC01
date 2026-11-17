@@ -99,7 +99,7 @@ async function displayTransactions() {
           const displayDate = normalizeDate(item.date) || "No date";
 
           return `
-                <div class="transaction-item ${bgColor} d-flex justify-content-between" style="border-bottom: 1px solid #ccc; padding: 8px 20px; margin: 0px;">
+                <div class="transaction-item ${bgColor} d-flex justify-content-between" data-id="${item.id}" data-type="${item.type}" style="border-bottom: 1px solid #ccc; padding: 8px 20px; margin: 0px; cursor: pointer;">
                     <div>
                         <div class="d-flex">
                             <p style="margin: 0 8px 0 0; font-size: 1.3rem; font-weight: bold;">${item.description || "Untitled"}</p>
@@ -108,12 +108,24 @@ async function displayTransactions() {
                         <p style="margin: 0px">${displayDate}</p>
                     </div>
                     <div class="align-items-center d-flex flex-nowrap" style="float: right; color: ${color}; font-weight: medium; font-size: 1.5rem;">
-                        ${sign}$${item.amount ?? 0}
+                        ${sign}$${((item.amount ?? 0) / 100).toFixed(2)}
                     </div>
                 </div>
             `;
         })
         .join("");
+       container
+         .querySelectorAll(".transaction-item")
+         .forEach((transaction) => {
+           transaction.addEventListener("click", () => {
+             const id = transaction.dataset.id;
+             const type = transaction.dataset.type;
+
+             if (type === "income") {
+               window.location.href = `editIncome.html?id=${id}`;
+             }
+           });
+         }); 
     } catch (error) {
       console.error("Error fetching transactions:", error);
       container.innerHTML = "<p>Failed to load transactions.</p>";

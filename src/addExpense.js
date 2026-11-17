@@ -18,8 +18,12 @@ async function submitExpense(event) {
   event.preventDefault(); // Stop the browser from reloading the page
 
   // 1. Collect the form values into ONE object (this becomes the Firestore document)
+  let amount = document.getElementById("expenseAmountInput").value;
+  amount = Number(amount.replace(".", ""));
+console.log(amount);
+console.log(typeof amount);
   const newExpense = {
-    amount: Number(document.getElementById("expenseAmountInput").value),
+    amount: amount,
     category: document.getElementById("expenseCategoryInput").value,
     date: document.getElementById("expenseDate").value,
     description: document.getElementById("expenseDescription").value, //
