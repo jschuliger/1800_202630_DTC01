@@ -26,7 +26,7 @@
     <main class="container py-4" style="max-width: 560px;">
         <h1>Edit Income</h1>
 
-        <form id="addIncomeForm" novalidate>
+        <form id="editIncomeForm" novalidate>
             <div class="mb-3">
                 <label for="incomeAmountInput" class="form-label">Amount</label>
                 <input type="number" id="incomeAmountInput" class="form-control" placeholder="0.00" required />
@@ -58,7 +58,7 @@
     <!---------------------------------------------->
 
     <script type="module" src="/src/app.js"></script>
-    <script type="module" src="/src/addIncome.js"></script>
+    <script type="module" src="/src/editIncome.js"></script>
     <script>
         document.getElementById("incomeDate").value =
             new Date().toISOString().split("T")[0];
