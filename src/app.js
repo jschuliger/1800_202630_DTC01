@@ -243,10 +243,13 @@ async function setValues() {
     accumulator[category] += amount;
     return accumulator;
   }, {});
-
+  const incomesBody = document.getElementById("accordion-incomes-body");
+  const expensesBody = document.getElementById("accordion-expenses-body");
+  incomesBody.innerHTML = "";
+  expensesBody.innerHTML = "";
   for (const [key, value] of Object.entries(totalIncomeByCategory)) {
     document.getElementById("accordion-incomes-body").insertAdjacentHTML(
-      "afterend",
+      "beforeend",
       `
     <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
@@ -267,7 +270,7 @@ async function setValues() {
 
   for (const [key, value] of Object.entries(totalExpenseByCategory)) {
     document.getElementById("accordion-expenses-body").insertAdjacentHTML(
-      "afterend",
+      "beforeend",
       `
     <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
