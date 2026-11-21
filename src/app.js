@@ -110,6 +110,15 @@ async function getData(type = "incomes") {
   }
 }
 
+// Combine amounts for the same category for the donut chart
+function groupByCategory(items) {
+  return items.reduce((acc, { category, amount }) => {
+    const name = category || "Uncategorized";
+    acc[name] = (acc[name] || 0) + amount;
+    return acc;
+  }, {});
+}
+
 // Set initial data for donut chart, and add functionality to radio buttons
 async function setDonutChart(type = "incomes") {
   try {
@@ -126,8 +135,9 @@ async function setDonutChart(type = "incomes") {
 
     chartData = chartData.filter(isInSelectedMonth);
 
-    let dataCategoryTotals = chartData.map((data) => data.amount);
-    let dataCategories = chartData.map((data) => data.category);
+    const groupedData = groupByCategory(chartData);
+    const dataCategories = Object.keys(groupedData);
+    const dataCategoryTotals = Object.values(groupedData);
 
     const existingChart = Chart.getChart("donut-chart");
     if (existingChart) {
@@ -164,6 +174,22 @@ async function setDonutChart(type = "incomes") {
           },
           title: {
             display: false,
+          },
+          tooltip: {
+            backgroundColor: "#000000",
+            // borderWidth: 1,
+            padding: 12,
+            cornerRadius: 20,
+            displayColors: false,
+            callbacks: {
+              label(context) {
+                const dollars = (context.parsed / 100).toLocaleString("en-CA", {
+                  style: "currency",
+                  currency: "CAD",
+                });
+                return `${dollars}`;
+              },
+            },
           },
         },
       },
