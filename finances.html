@@ -5,66 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finances</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
-    <style>
-      @media (max-width: 768px) {
-        #side-navbar {
-          position: fixed;
-          top: 120px;
-          left: 16px;
-          z-index: 1000;
-          box-shadow: 5px 5px 0 #000;
-        }
-        #hamburger-menu {
-          box-shadow: 5px 5px 0 #000;
-        }
-      }
-    </style>
   </head>
   <body>
     <!-- Desktop view is flexbox -->
     <div class="d-md-flex vh-md-100" style="height: 100vh">
-      <!-- Hamburger menu (mobile) -->
-      <svg
-        id="hamburger-menu"
-        role="button"
-        xmlns="http://www.w3.org/2000/svg"
-        height="70px"
-        viewBox="0 -960 960 960"
-        width="70px"
-        fill="#000000"
-        class="position-absolute d-md-none"
-        style="
-          top: 5%;
-          left: 5%;
-          background-color: lightgrey;
-          border-radius: 10px;
-        "
-      >
-        <path
-          d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-        />
-      </svg>
-
-      <!-- Side navbar for desktop view -->
-      <aside
-        id="side-navbar"
-        class="d-none d-md-block h-100"
-        style="background-color: lightgrey; min-width: 220px; max-width: 220px"
-      >
-        <ul
-          class="nav nav-pills flex-column p-3 align-items-start justify-content-around"
-          style="height: 400px; font-size: 1.7em"
-        >
-          <li class="nav-item">
-            <a href="overview.html" class="nav-link">Overview</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link active">Finances</a>
-          </li>
-          <li class="nav-item"><a href="#" class="nav-link">Categories</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Graphs</a></li>
-        </ul>
-      </aside>
+      <!-- SIde navbar / Hamburger menu -->
+      <side-navbar></side-navbar>
       <!-- Main content -->
       <div
         class="d-flex flex-column flex-md-row flex-grow-1 min-w-0 h-100 overflow-auto overflow-md-hidden"
@@ -141,6 +87,7 @@
     </div>
     <script type="module" src="/src/app.js"></script>
     <script type="module" src="/src/components/donut-chart.js"></script>
+    <script type="module" src="/src/components/side-navbar.js"></script>
     <script type="module" src="/src/finances.js"></script>
   </body>
 </html>

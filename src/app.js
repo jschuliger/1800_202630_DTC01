@@ -24,15 +24,21 @@ import "/src/styles/style.css";
 // Custom global JS code (shared with all pages)can go here.
 //--------------------------------------------------------------
 
-// This is an example function. Replace it with your own logic.
-function checkImports() {
-  // TODO: implement your logic here
-  console.log("Bootstrap and custom styles loaded.");
-}
-document.addEventListener("DOMContentLoaded", checkImports);
+let currentUser = null;
+onAuthReady(function (user) {
+  if (!user) {
+    location.href = "index.html";
+  } else {
+    currentUser = user;
+    setDonutChart("incomes");
+    setValues();
+  }
+});
+
+// Format money to display with cents
+const formatMoney = (amount) => `$${(amount / 100).toFixed(2)}`;
 
 // Clickable month navigation
-
 let currentDate = new Date();
 currentDate.setDate(1);
 
@@ -73,28 +79,7 @@ switchMonth();
 // Checks the month
 function isInSelectedMonth(item) {
   if (!item.date) return false;
-
-  let year, month;
-
-  if (typeof item.date === "string") {
-    // Handles "YYYY-MM-DD" or ISO strings like "2026-11-16T00:00:00Z"
-    [year, month] = item.date.split("T")[0].split("-").map(Number);
-  } else if (item.date instanceof Date) {
-    // Handles standard JavaScript Date objects
-    year = item.date.getFullYear();
-    month = item.date.getMonth() + 1;
-  } else if (typeof item.date.toDate === "function") {
-    // Handles Firebase/Firestore Timestamps
-    const dateObj = item.date.toDate();
-    year = dateObj.getFullYear();
-    month = dateObj.getMonth() + 1;
-  } else {
-    // Fallback for numeric timestamps (e.g., 1731798000000)
-    const dateObj = new Date(item.date);
-    if (isNaN(dateObj.getTime())) return false;
-    year = dateObj.getFullYear();
-    month = dateObj.getMonth() + 1;
-  }
+  const [year, month] = item.date.split("-").map(Number);
   return (
     year === currentDate.getFullYear() && month === currentDate.getMonth() + 1
   );
@@ -113,37 +98,30 @@ function mobileMenu() {
 mobileMenu();
 
 // Returns an array of incomes or expenses dicts
-function getData(type = "incomes") {
-  return new Promise((resolve, reject) => {
-    onAuthReady(async (user) => {
-      if (!user) {
-        console.error("No authenticated user found.");
-        resolve([]);
-        return;
-      }
-
-      try {
-        const subcollectionRef = collection(db, "users", user.uid, type);
-        const querySnapshot = await getDocs(subcollectionRef);
-        let dataArray = [];
-
-        querySnapshot.forEach((doc) => {
-          dataArray.push(doc.data());
-        });
-
-        resolve(dataArray);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-        reject(error);
-      }
-    });
-  });
+async function getData(type = "incomes") {
+  if (!currentUser) return [];
+  try {
+    const subcollectionRef = collection(db, "users", currentUser.uid, type);
+    const querySnapshot = await getDocs(subcollectionRef);
+    return querySnapshot.docs.map((doc) => doc.data());
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 }
 
-getData();
+// Combine amounts for the same category for the donut chart
+function groupByCategory(items) {
+  return items.reduce((acc, { category, amount }) => {
+    const name = category || "Uncategorized";
+    acc[name] = (acc[name] || 0) + amount;
+    return acc;
+  }, {});
+}
 
 // Set initial data for donut chart, and add functionality to radio buttons
 async function setDonutChart(type = "incomes") {
+  if (!document.getElementById("donut-chart")) return;
   try {
     let chartData = [];
     if (type === "incomes" || type === "expenses") {
@@ -158,8 +136,9 @@ async function setDonutChart(type = "incomes") {
 
     chartData = chartData.filter(isInSelectedMonth);
 
-    let dataCategoryTotals = chartData.map((data) => data.amount);
-    let dataCategories = chartData.map((data) => data.category);
+    const groupedData = groupByCategory(chartData);
+    const dataCategories = Object.keys(groupedData);
+    const dataCategoryTotals = Object.values(groupedData);
 
     const existingChart = Chart.getChart("donut-chart");
     if (existingChart) {
@@ -197,6 +176,22 @@ async function setDonutChart(type = "incomes") {
           title: {
             display: false,
           },
+          tooltip: {
+            backgroundColor: "#000000",
+            // borderWidth: 1,
+            padding: 12,
+            cornerRadius: 20,
+            displayColors: false,
+            callbacks: {
+              label(context) {
+                const dollars = (context.parsed / 100).toLocaleString("en-CA", {
+                  style: "currency",
+                  currency: "CAD",
+                });
+                return `${dollars}`;
+              },
+            },
+          },
         },
       },
     });
@@ -209,10 +204,10 @@ async function setDonutChart(type = "incomes") {
     setDonutChart(event.target.value);
   });
 }
-setDonutChart("incomes");
 
 // Set all inital values for accordion dropdown menu
 async function setValues() {
+  if (!document.getElementById("net-worth")) return;
   let incomeData = await getData("incomes");
   let expenseData = await getData("expenses");
 
@@ -230,8 +225,11 @@ async function setValues() {
   });
   let netWorth = netIncome - netExpense;
   // Set net worth amount
+
   document.getElementById("net-worth").textContent =
     `$${(netWorth / 100).toFixed(2)}`;
+
+  if (!document.getElementById("accordion-incomes")) return;
   document.getElementById("accordion-incomes").textContent =
     `$${(netIncome / 100).toFixed(2)}`;
   document.getElementById("accordion-expenses").textContent =
@@ -245,10 +243,13 @@ async function setValues() {
     accumulator[category] += amount;
     return accumulator;
   }, {});
-
+  const incomesBody = document.getElementById("accordion-incomes-body");
+  const expensesBody = document.getElementById("accordion-expenses-body");
+  incomesBody.innerHTML = "";
+  expensesBody.innerHTML = "";
   for (const [key, value] of Object.entries(totalIncomeByCategory)) {
     document.getElementById("accordion-incomes-body").insertAdjacentHTML(
-      "afterend",
+      "beforeend",
       `
     <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
@@ -269,7 +270,7 @@ async function setValues() {
 
   for (const [key, value] of Object.entries(totalExpenseByCategory)) {
     document.getElementById("accordion-expenses-body").insertAdjacentHTML(
-      "afterend",
+      "beforeend",
       `
     <div class="d-flex justify-content-between px-4" style="font-size: 1.5em;">
       <p>${key}</p>
@@ -280,5 +281,3 @@ async function setValues() {
     );
   }
 }
-
-setValues();
