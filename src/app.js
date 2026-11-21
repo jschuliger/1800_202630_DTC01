@@ -24,15 +24,21 @@ import "/src/styles/style.css";
 // Custom global JS code (shared with all pages)can go here.
 //--------------------------------------------------------------
 
-// This is an example function. Replace it with your own logic.
-function checkImports() {
-  // TODO: implement your logic here
-  console.log("Bootstrap and custom styles loaded.");
-}
-document.addEventListener("DOMContentLoaded", checkImports);
+let currentUser = null;
+onAuthReady(function (user) {
+  if (!user) {
+    location.href = "index.html";
+  } else {
+    currentUser = user;
+  }
+  setDonutChart("incomes");
+  setValues();
+});
+
+// Format money to display with cents
+const formatMoney = (amount) => `$${(amount / 100).toFixed(2)}`;
 
 // Clickable month navigation
-
 let currentDate = new Date();
 currentDate.setDate(1);
 
@@ -73,28 +79,7 @@ switchMonth();
 // Checks the month
 function isInSelectedMonth(item) {
   if (!item.date) return false;
-
-  let year, month;
-
-  if (typeof item.date === "string") {
-    // Handles "YYYY-MM-DD" or ISO strings like "2026-11-16T00:00:00Z"
-    [year, month] = item.date.split("T")[0].split("-").map(Number);
-  } else if (item.date instanceof Date) {
-    // Handles standard JavaScript Date objects
-    year = item.date.getFullYear();
-    month = item.date.getMonth() + 1;
-  } else if (typeof item.date.toDate === "function") {
-    // Handles Firebase/Firestore Timestamps
-    const dateObj = item.date.toDate();
-    year = dateObj.getFullYear();
-    month = dateObj.getMonth() + 1;
-  } else {
-    // Fallback for numeric timestamps (e.g., 1731798000000)
-    const dateObj = new Date(item.date);
-    if (isNaN(dateObj.getTime())) return false;
-    year = dateObj.getFullYear();
-    month = dateObj.getMonth() + 1;
-  }
+  const [year, month] = item.date.split("-").map(Number);
   return (
     year === currentDate.getFullYear() && month === currentDate.getMonth() + 1
   );
@@ -113,34 +98,17 @@ function mobileMenu() {
 mobileMenu();
 
 // Returns an array of incomes or expenses dicts
-function getData(type = "incomes") {
-  return new Promise((resolve, reject) => {
-    onAuthReady(async (user) => {
-      if (!user) {
-        console.error("No authenticated user found.");
-        resolve([]);
-        return;
-      }
-
-      try {
-        const subcollectionRef = collection(db, "users", user.uid, type);
-        const querySnapshot = await getDocs(subcollectionRef);
-        let dataArray = [];
-
-        querySnapshot.forEach((doc) => {
-          dataArray.push(doc.data());
-        });
-
-        resolve(dataArray);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-        reject(error);
-      }
-    });
-  });
+async function getData(type = "incomes") {
+  if (!currentUser) return [];
+  try {
+    const subcollectionRef = collection(db, "users", currentUser.uid, type);
+    const querySnapshot = await getDocs(subcollectionRef);
+    return querySnapshot.docs.map((doc) => doc.data());
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 }
-
-getData();
 
 // Set initial data for donut chart, and add functionality to radio buttons
 async function setDonutChart(type = "incomes") {
@@ -209,7 +177,6 @@ async function setDonutChart(type = "incomes") {
     setDonutChart(event.target.value);
   });
 }
-setDonutChart("incomes");
 
 // Set all inital values for accordion dropdown menu
 async function setValues() {
@@ -280,5 +247,3 @@ async function setValues() {
     );
   }
 }
-
-setValues();
