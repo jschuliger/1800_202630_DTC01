@@ -30,9 +30,9 @@ onAuthReady(function (user) {
     location.href = "index.html";
   } else {
     currentUser = user;
+    setDonutChart("incomes");
+    setValues();
   }
-  setDonutChart("incomes");
-  setValues();
 });
 
 // Format money to display with cents
@@ -121,6 +121,7 @@ function groupByCategory(items) {
 
 // Set initial data for donut chart, and add functionality to radio buttons
 async function setDonutChart(type = "incomes") {
+  if (!document.getElementById("donut-chart")) return;
   try {
     let chartData = [];
     if (type === "incomes" || type === "expenses") {
@@ -206,6 +207,7 @@ async function setDonutChart(type = "incomes") {
 
 // Set all inital values for accordion dropdown menu
 async function setValues() {
+  if (!document.getElementById("net-worth")) return;
   let incomeData = await getData("incomes");
   let expenseData = await getData("expenses");
 
@@ -223,8 +225,11 @@ async function setValues() {
   });
   let netWorth = netIncome - netExpense;
   // Set net worth amount
+
   document.getElementById("net-worth").textContent =
     `$${(netWorth / 100).toFixed(2)}`;
+
+  if (!document.getElementById("accordion-incomes")) return;
   document.getElementById("accordion-incomes").textContent =
     `$${(netIncome / 100).toFixed(2)}`;
   document.getElementById("accordion-expenses").textContent =
