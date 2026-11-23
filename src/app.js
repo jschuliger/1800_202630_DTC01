@@ -44,7 +44,8 @@ currentDate.setDate(1);
 
 function displayMonth() {
   const currentMonth = currentDate.toLocaleString("default", {
-    month: "long",
+    month: "long", 
+    year: "numeric",
   });
   document.getElementById("month").textContent = currentMonth;
 }
