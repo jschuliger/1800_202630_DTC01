@@ -1,3 +1,5 @@
+import {logoutUser,  onAuthReady} from "/src/authentication.js";
+
 class SideNavbar extends HTMLElement {
   connectedCallback() {
     // Get the current filename (e.g., "finances.html", default to "index.html")
@@ -65,9 +67,18 @@ class SideNavbar extends HTMLElement {
           style="height: 400px; font-size: 1.7em"
         >
           ${navItems}
+          <li class="nav-item">
+            <button id="sidebarLogoutBtn" type="button" class="nav-link text-danger">
+              Logout
+            </button>
+          </li>
+
         </ul>
       </aside>
     `;
+
+    const logoutBtn = this.querySelector("#sidebarLogoutBtn");
+    logoutBtn.addEventListener("click", logoutUser);
 
     const hamburger = this.querySelector("#hamburger-menu");
     const sidebar = this.querySelector("#side-navbar");
