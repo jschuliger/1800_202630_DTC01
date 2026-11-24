@@ -47,5 +47,9 @@ console.log(typeof amount);
   }
 }
 
-// ---- (2) Connect it: "form, when you are submitted, run saveHike" ----
-document.getElementById("addIncomeForm").addEventListener("submit", submitIncome);
+// ---- (2) Connect it: "form, when you are submitted, run submitIncome" ----
+const incomeForm = document.getElementById("addIncomeForm");
+
+if (incomeForm) {
+  incomeForm.addEventListener("submit", submitIncome);
+}
