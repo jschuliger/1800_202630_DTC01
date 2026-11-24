@@ -58,25 +58,19 @@ async function editIncome(event) {
   };
 
   try {
-    const incomeRef = doc(
-      db,
-      "users",
-      currentUser.uid,
-      "incomes",
-      incomeId
-    );
+    const incomeRef = doc(db, "users", currentUser.uid, "incomes", incomeId);
 
     await updateDoc(incomeRef, updatedIncome);
 
     location.href = "finances.html";
   } catch (error) {
     alert(
-      `Error updating income:\n${error.code || ""}\n${error.message || error}`
+      `Error updating income:\n${error.code || ""}\n${error.message || error}`,
     );
   }
 }
 
-// ---- (2) Connect it: "form, when you are submitted, run saveHike" ----
+// ---- (2) Connect it: "form, when you are submitted, run editIncome" ----
 document
   .getElementById("editIncomeForm")
   .addEventListener("submit", editIncome);

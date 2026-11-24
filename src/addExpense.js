@@ -20,8 +20,8 @@ async function submitExpense(event) {
   // 1. Collect the form values into ONE object (this becomes the Firestore document)
   let amount = document.getElementById("expenseAmountInput").value;
   amount = Number(amount.replace(".", ""));
-console.log(amount);
-console.log(typeof amount);
+  console.log(amount);
+  console.log(typeof amount);
   const newExpense = {
     amount: amount,
     category: document.getElementById("expenseCategoryInput").value,
@@ -47,6 +47,8 @@ console.log(typeof amount);
 }
 
 // ---- (2) Connect it: "form, when you are submitted, run submitExpense" ----
-document
-  .getElementById("addExpenseForm")
-  .addEventListener("submit", submitExpense);
+const expenseForm = document.getElementById("addExpenseForm");
+
+if (expenseForm) {
+  expenseForm.addEventListener("submit", submitExpense);
+}

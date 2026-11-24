@@ -120,6 +120,9 @@ async function displayTransactions(uid) {
         if (type === "income") {
           window.location.href = `editIncome.html?id=${id}`;
         }
+        if (type === "expense") {
+          window.location.href = `editExpense.html?id=${id}`;
+        }
       });
     });
   } catch (error) {
