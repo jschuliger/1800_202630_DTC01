@@ -27,7 +27,12 @@ import "/src/styles/style.css";
 let currentUser = null;
 onAuthReady(function (user) {
   if (!user) {
-    location.href = "index.html";
+    const page = window.location.pathname.split("/").pop();
+
+    if (page !== "login.html" && page !== "index.html") {
+      location.href = "index.html";
+    }
+    
   } else {
     currentUser = user;
     setDonutChart("incomes");
