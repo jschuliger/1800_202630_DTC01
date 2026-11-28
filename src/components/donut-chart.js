@@ -1,7 +1,7 @@
 class DonutChart extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-        <section class="d-inline-flex flex-column align-items-center gap-4 mt-5 border bg-accent rounded-4 px-5 py-2">
+        <section class="d-inline-flex flex-column align-items-center gap-4 mt-5 border bg-accent-donut rounded-4 px-5 py-2">
             <div
             class="btn-group"
             role="group"

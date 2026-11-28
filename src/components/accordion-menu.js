@@ -24,7 +24,7 @@ class AccordionMenu extends HTMLElement {
                     id="panelsStayOpen-collapseOne"
                     class="accordion-collapse collapse show"
                 >
-                    <div class="accordion-body bg-white py-2" id="accordion-incomes-body"></div>
+                    <div class="accordion-body bg-accordion-body py-2" id="accordion-incomes-body"></div>
                 </div>
             </div>
             <div class="accordion-item border-0">

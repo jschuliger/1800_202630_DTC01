@@ -163,11 +163,11 @@ async function setDonutChart(type = "incomes") {
             label: "",
             data: dataCategoryTotals,
             backgroundColor: [
-              "#14532d", // Deep Forest Green
-              "#16a34a", // Emerald Green
-              "#0d9488", // Slate Teal
-              "#84cc16", // Fresh Lime
-              "#cbd5e1", // Cool Neutral Slate
+              "#B7EFC5", // Deep Forest Green
+              "#6EDE8A", // Slate Teal
+              "#2DC653", // Cool Neutral Slate
+              "#208B3A", // Cool Neutral Slate
+              "#155D27", // Cool Neutral Slate
             ],
 
             borderColor: "#f3ebdd",

@@ -2,14 +2,15 @@
 
 :root {
   /* 60% Background: Crisp sage-tinted off-white */
-  --background: #f7f6f2;
-
+  --background: #fcf8e9;
+  --background-accordion-body: #f7f7f7;
   /* 30% Primary & Secondary: Trustworthy forest & emerald greens */
   --primary: #14532d;
   --secondary: #16a34a;
 
   /* 10% Accent: Soft mint highlight for cards and badges */
-  --accent: #dcfce7;
+  --accent: #ccfccf;
+  --accent-donut: #f8f4da;
 
   /* Charcoal slate for crisp, high-contrast numbers */
   --text-primary: #0f172a;
@@ -25,6 +26,10 @@
 
 .bg-primary {
   background-color: var(--primary) !important;
+}
+
+.bg-accordion-body {
+  background-color: var(--background-accordion-body) !important;
 }
 
 .text-primary {
@@ -44,11 +49,15 @@
   background-color: var(--accent);
 }
 
+.bg-accent-donut {
+  background-color: var(--accent-donut);
+}
+
 /* Donut chart & banking toggle buttons */
 .btn-theme {
   --bs-btn-color: var(--primary);
   --bs-btn-border-color: var(--primary);
-  --bs-btn-bg: #ffffff;
+  --bs-btn-bg: #f7f7f7;
 
   --bs-btn-hover-color: #ffffff;
   --bs-btn-hover-bg: var(--secondary);
