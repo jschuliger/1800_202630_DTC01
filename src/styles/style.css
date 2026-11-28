@@ -97,3 +97,40 @@
   --bs-btn-active-bg: var(--primary);
   --bs-btn-active-border-color: var(--primary);
 }
+
+/* Add Transaction Tabs */
+.theme-tab-income,
+.theme-tab-expense {
+  color: var(--text-primary) !important;
+}
+
+.theme-tab-income.active {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+.theme-tab-expense.active {
+  background-color: #b91c1c !important;
+  color: #ffffff !important;
+}
+
+/* Expense Submit Button */
+.btn-expense-solid {
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: #b91c1c;
+  --bs-btn-border-color: #b91c1c;
+
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #991b1b;
+  --bs-btn-hover-border-color: #991b1b;
+
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: #7f1d1d;
+  --bs-btn-active-border-color: #7f1d1d;
+}
+
+/* Green focus ring on form inputs instead of Bootstrap blue */
+.theme-input:focus {
+  border-color: var(--secondary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.2) !important;
+}
