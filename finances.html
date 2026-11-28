@@ -9,37 +9,50 @@
   <body>
     <!-- Desktop view is flexbox -->
     <div class="d-md-flex vh-md-100" style="height: 100vh">
-      <!-- SIde navbar / Hamburger menu -->
+      <!-- Side navbar / Hamburger menu -->
       <side-navbar></side-navbar>
       <!-- Main content -->
       <div
         class="d-flex flex-column flex-md-row flex-grow-1 min-w-0 h-100 overflow-auto overflow-md-hidden"
       >
         <!-- Net worth and chart -->
-        <main class="p-4 p-md-5 d-flex flex-column flex-fill overflow-md-auto">
+        <main
+          class="px-4 pt-5 pb-2 p-md-5 d-flex flex-column flex-md-fill overflow-md-auto"
+        >
           <div class="d-flex flex-column align-items-center">
-            <h1 style="font-size: 3em">Finances</h1>
+            <h1 style="font-size: 3em" class="fw-bold text-primary">
+              Finances
+            </h1>
             <div class="d-flex align-items-center mt-5 gap-3">
               <svg
                 xmlns="http://w3.org"
                 height="24px"
                 viewBox="0 -960 960 960"
                 width="24px"
-                fill="#000000"
+                fill="currentColor"
+                class="text-primary"
+                style="cursor: pointer"
                 id="left-arrow"
               >
                 <path
                   d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"
                 />
               </svg>
-              <p class="mb-1 fw-bold text-primary bg-secondary-subtle rounded-pill" id="month" style="font-size: 1.4em; width: 190px; text-align: center;">month</p>
+              <p
+                class="mb-0 fw-bold text-primary bg-accent border border-success-subtle rounded-pill py-1"
+                id="month"
+                style="font-size: 1.4em; width: 190px; text-align: center"
+              >
+                month
+              </p>
               <svg
                 xmlns="http://w3.org"
                 height="24px"
                 viewBox="0 -960 960 960"
                 width="24px"
-                fill="#000000"
-                style="transform: rotate(180deg)"
+                fill="currentColor"
+                class="text-primary"
+                style="transform: rotate(180deg); cursor: pointer"
                 id="right-arrow"
               >
                 <path
@@ -48,40 +61,56 @@
               </svg>
             </div>
           </div>
-          <div class="d-flex justify-content-center">
-            <p style="font-size: 4em" class="m-0" id="net-worth">$000.00</p>
+          <div class="d-flex justify-content-center mt-3">
+            <p
+              style="font-size: 4em"
+              class="m-0 fw-bold text-primary"
+              id="net-worth"
+            >
+              $000.00
+            </p>
           </div>
           <donut-chart
             class="d-none d-md-flex justify-content-center"
           ></donut-chart>
         </main>
+
         <!-- Past transactions -->
         <div
-          class="d-flex flex-column flex-fill p-3 p-md-5"
+          class="d-flex flex-column flex-fill px-3 pt-5 pb-3 p-md-5 mt-5"
           style="min-height: 0"
         >
           <div
-            class="card d-flex flex-column"
-            style="max-height: 100%; min-height: 0"
+            class="card d-flex flex-column border-0 rounded-4 shadow-sm overflow-hidden"
+            style="min-height: 0"
           >
             <div
-              class="card-header flex-shrink-0"
-              style="font-size: 2rem; background-color: rgb(246, 246, 246)"
+              class="card-header flex-shrink-0 bg-accent text-primary fw-bold border-bottom border-success-subtle py-3 px-4"
+              style="font-size: 1.5rem"
             >
               Recent Transactions
             </div>
-            <div id="transactions-list" class="card-body overflow-auto p-0">
+            <div
+              id="transactions-list"
+              class="card-body bg-white overflow-auto p-0"
+            >
               <!-- Transactions appear here from finances.js -->
             </div>
+          </div>
+
+          <!-- Centered button below the transactions card -->
+          <div class="d-flex justify-content-center flex-shrink-0 mt-3">
+            <a
+              class="btn btn-theme-solid rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              href="addTransaction.html"
+            >
+              + Add Transaction
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-center">
-      <a class="btn btn-success mb-3" href="addTransaction.html">
-        ➕ Add Transaction
-      </a>
-    </div>
+
     <script type="module" src="/src/app.js"></script>
     <script type="module" src="/src/components/donut-chart.js"></script>
     <script type="module" src="/src/components/side-navbar.js"></script>

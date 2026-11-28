@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import { onAuthReady } from "/src/authentication.js";
 import { db } from "./firebaseConfig.js";
+import "./styles/style.css";
 import {
   doc,
   onSnapshot,
@@ -32,7 +33,6 @@ onAuthReady(function (user) {
     if (page !== "login.html" && page !== "index.html") {
       location.href = "index.html";
     }
-    
   } else {
     currentUser = user;
     setDonutChart("incomes");
@@ -49,7 +49,7 @@ currentDate.setDate(1);
 
 function displayMonth() {
   const currentMonth = currentDate.toLocaleString("default", {
-    month: "long", 
+    month: "long",
     year: "numeric",
   });
   document.getElementById("month").textContent = currentMonth;
@@ -163,12 +163,15 @@ async function setDonutChart(type = "incomes") {
             label: "",
             data: dataCategoryTotals,
             backgroundColor: [
-              "rgb(255, 99, 132)", // Pink
-              "rgb(54, 162, 235)", // Blue
-              "rgb(255, 205, 86)", // Yellow
-              "rgb(75, 192, 192)", // Teal
+              "#B7EFC5", // Deep Forest Green
+              "#6EDE8A", // Slate Teal
+              "#2DC653", // Cool Neutral Slate
+              "#208B3A", // Cool Neutral Slate
+              "#155D27", // Cool Neutral Slate
             ],
-            // borderColor: "#000",
+
+            borderColor: "#f3ebdd",
+            borderWidth: 4,
             hoverOffset: 4,
           },
         ],

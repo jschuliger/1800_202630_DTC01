@@ -1,7 +1,7 @@
 class DonutChart extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-        <section class="d-flex flex-column align-items-center gap-4 mt-5">
+        <section class="d-inline-flex flex-column align-items-center gap-4 mt-5 border bg-accent-donut rounded-4 px-5 py-2">
             <div
             class="btn-group"
             role="group"
@@ -16,7 +16,7 @@ class DonutChart extends HTMLElement {
                 value="incomes"
                 checked
             />
-            <label class="btn btn-outline-success" for="donut-incomes"
+            <label class="btn btn-theme" for="donut-incomes"
                 >Income</label
             >
             <input
@@ -26,7 +26,7 @@ class DonutChart extends HTMLElement {
                 id="donut-expenses"
                 value="expenses"
             />
-            <label class="btn btn-outline-success" for="donut-expenses"
+            <label class="btn btn-theme" for="donut-expenses"
                 >Expenses</label
             >
             <input
@@ -36,7 +36,7 @@ class DonutChart extends HTMLElement {
                 id="donut-net-worth"
                 value="net-worth"
             />
-            <label class="btn btn-outline-success" for="donut-net-worth"
+            <label class="btn btn-theme" for="donut-net-worth"
                 >Net Worth</label
             >
             </div>

@@ -1,1 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+:root {
+  /* 60% Background: Crisp sage-tinted off-white */
+  --background: #fcf8e9;
+  --background-accordion-body: #f7f7f7;
+  /* 30% Primary & Secondary: Trustworthy forest & emerald greens */
+  --primary: #14532d;
+  --secondary: #16a34a;
 
+  /* 10% Accent: Soft mint highlight for cards and badges */
+  --accent: #ccfccf;
+  --accent-donut: #f8f4da;
+
+  /* Charcoal slate for crisp, high-contrast numbers */
+  --text-primary: #0f172a;
+
+  /* Font */
+  --font: "Source Sans 3", system-ui, sans-serif;
+
+  /* ---------- Bootstrap variables ---------- */
+  --bs-body-bg: var(--background);
+  --bs-body-color: var(--text-primary);
+  --bs-body-font-family: var(--font);
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.bg-accordion-body {
+  background-color: var(--background-accordion-body) !important;
+}
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
+
+.text-secondary {
+  color: var(--secondary) !important;
+}
+
+/* Use for cards, badges, and small highlights */
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-accent-donut {
+  background-color: var(--accent-donut);
+}
+
+/* Donut chart & banking toggle buttons */
+.btn-theme {
+  --bs-btn-color: var(--primary);
+  --bs-btn-border-color: var(--primary);
+  --bs-btn-bg: #f7f7f7;
+
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: var(--secondary);
+  --bs-btn-hover-border-color: var(--secondary);
+
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: var(--primary);
+  --bs-btn-active-border-color: var(--primary);
+}
+
+/* Banking Accordion Styling */
+.accordion-income,
+.accordion-income:not(.collapsed) {
+  background-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+
+.accordion-expense,
+.accordion-expense:not(.collapsed) {
+  background-color: #f3e8e5 !important; /* Muted warm neutral that pairs with sage green */
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+
+.text-expense {
+  color: #b91c1c !important; /* Crisp dark crimson for outflow amounts */
+}
+
+/* Remove Bootstrap's blue focus glow on accordion headers */
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(20, 83, 45, 0.2) !important;
+}
+
+/* Solid primary action button (Add Transaction) */
+.btn-theme-solid {
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: var(--primary);
+  --bs-btn-border-color: var(--primary);
+
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: var(--secondary);
+  --bs-btn-hover-border-color: var(--secondary);
+
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: var(--primary);
+  --bs-btn-active-border-color: var(--primary);
+}
+
+/* Add Transaction Tabs */
+.theme-tab-income,
+.theme-tab-expense {
+  color: var(--text-primary) !important;
+}
+
+.theme-tab-income.active {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+.theme-tab-expense.active {
+  background-color: #b91c1c !important;
+  color: #ffffff !important;
+}
+
+/* Expense Submit Button */
+.btn-expense-solid {
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: #b91c1c;
+  --bs-btn-border-color: #b91c1c;
+
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #991b1b;
+  --bs-btn-hover-border-color: #991b1b;
+
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: #7f1d1d;
+  --bs-btn-active-border-color: #7f1d1d;
+}
+
+/* Green focus ring on form inputs instead of Bootstrap blue */
+.theme-input:focus {
+  border-color: var(--secondary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(22, 163, 74, 0.2) !important;
+}
