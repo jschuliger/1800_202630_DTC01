@@ -9,8 +9,6 @@ class SideNavbar extends HTMLElement {
     const links = [
       { name: "Overview", href: "overview.html" },
       { name: "Finances", href: "finances.html" },
-      { name: "Categories", href: "categories.html" },
-      { name: "Graphs", href: "graphs.html" },
     ];
 
     // Set current page to active on the side navbar
@@ -100,7 +98,7 @@ class SideNavbar extends HTMLElement {
       >
         <ul
           class="nav nav-pills flex-column p-3 gap-2 align-items-stretch justify-content-between"
-          style="min-height: 400px; font-size: 1.35em;"
+          style="min-height: 200px; font-size: 1.35em;"
         >
           <div class="d-flex flex-column gap-2">
             ${navItems}
